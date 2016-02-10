@@ -1,0 +1,14 @@
+# README #
+*
+* Simple image compressing software that compress every png, bmp and jpg files 
+* in a single folder.
+*
+* Version 1.0
+*
+* No libraries or dependencies needed, just pure Java SE.
+* 
+* Minimum Java version: Java SE 7.
+* 
+* Written by David Sosa to make uploading images to a server a lot easier.
+* davidjsosav@gmail.com
+*
