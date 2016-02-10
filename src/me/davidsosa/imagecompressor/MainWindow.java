@@ -79,6 +79,8 @@ public class MainWindow extends JFrame {
 
         replaceOriginalsCheckBox = new JCheckBox("Replace original images");
 
+        JProgressBar progressBar = new JProgressBar();
+        
         compressButton = new JButton("Compress");
         compressButton.addActionListener(new CompressButtonListener());
 
@@ -86,12 +88,14 @@ public class MainWindow extends JFrame {
         ((FlowLayout) centerPanel.getLayout()).setAlignment(FlowLayout.CENTER);
         centerPanel.add(pathLabel);
         centerPanel.add(replaceOriginalsCheckBox);
+        centerPanel.add(progressBar);
         centerPanel.add(errorLabel);
         getContentPane().add(centerPanel, BorderLayout.CENTER);
         getContentPane().add(menuBar, BorderLayout.NORTH);
         getContentPane().add(compressButton, BorderLayout.SOUTH);
 
         imageCompressor = new ImageCompressor();
+        imageCompressor.setProgressBar(progressBar);
     }
 
     public static void main(String[] args) {

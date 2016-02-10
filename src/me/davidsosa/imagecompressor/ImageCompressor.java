@@ -33,6 +33,7 @@ import java.io.FileFilter;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.Iterator;
+import javax.swing.JProgressBar;
 
 /**
  * Contains utility methods for compressing a single image or all images in a
@@ -41,6 +42,8 @@ import java.util.Iterator;
  * @author David Sosa
  */
 public class ImageCompressor {
+
+    private JProgressBar progressBar;
 
     /**
      * <p>
@@ -67,12 +70,16 @@ public class ImageCompressor {
         System.out.println();
         FileFilter filter = new ImageFileFilter();
         File[] files = directory.listFiles(filter);
+        int numOfFiles = files.length;
+        int currentFileIndex = 0;
         for (File file : files) {
             try {
                 compressImage(file, quality, replaceOriginals);
             } catch (IOException ex) {
                 System.err.println("Could not compress image " + file.getName());
                 System.err.println();
+            } finally {
+                updateProgress(100 * ++currentFileIndex / numOfFiles);
             }
         }
     }
@@ -134,6 +141,16 @@ public class ImageCompressor {
             System.out.println();
         }
         return compressedFile;
+    }
+
+    private void updateProgress(int currentProgress) {
+        if (progressBar != null) {
+            progressBar.setValue(currentProgress);
+        }
+    }
+
+    public void setProgressBar(JProgressBar progressBar) {
+        this.progressBar = progressBar;
     }
 
     /**
